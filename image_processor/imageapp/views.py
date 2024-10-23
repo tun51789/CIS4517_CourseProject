@@ -17,8 +17,9 @@ def upload_image(request):
     return render(request, 'upload_image.html', {'form': form})
 
 def apply_filters(image_path):
-    # Example: Convert to grayscale
-    img = Image.open(image_path).convert('L')
-    processed_path = 'path/to/save/processed_image.jpg'
-    img.save(processed_path)
+    scales = ['L', 'RGB', 'CMYK']
+    for scale in scales:
+        img = Image.open(image_path).convert(scale)
+        processed_path = 'path/to/save/processed_image_'+scale+'.jpg'
+        img.save(processed_path)
     return processed_path
